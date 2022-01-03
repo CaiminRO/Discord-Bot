@@ -16,43 +16,39 @@ handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(me
 logger.addHandler(handler)
 """
 
-
-# discord bot start client
-client = discord.Client()
-
 # command prefix intialize
-client = commands.when_mentioned_or(command_prefix='$')
+bot = commands.Bot(command_prefix=commands.when_mentioned_or('$'))
 
 
-@client.event
+@bot.event
 async def on_ready():
-    print("We have logged in as {0.user}".format(client))
+    print("We have logged in as {0.user}".format(bot))
 
 
-@client.command()
+@bot.command()
 async def echo(ctx, *, message: str):
     await ctx.send(message)
 
-@client.command()
+@bot.command()
 async def argsin(ctx, *args):
     await ctx.send('{} arguments: {}'.format(len(args), ', '.join(args)))
 
-@client.command()
+@bot.command()
 async def changeCommandPrefix(ctx, arg1):
-    client = commands.Bot(command_prefix=arg1)
+    bot = commands.Bot(command_prefix=commands.when_mentioned_or(arg1))
     await ctx.send("Change command prefix to: " + string(arg1))
 
-@client.command(name = "echo", aliases=["repeat"])
+@bot.command(name = "echo", aliases=["repeat"])
 async def  echo(self, ctx:commands.Context, message: str):
     await ctx.send(message)
 
-@client.command(name = "argcheck", aliases=["argcount"])
+@bot.command(name = "argcheck", aliases=["argcount"])
 async def  num_args(self, ctx:commands.Context, *args):
     await ctx.send('{} arguments: {}'.format(len(args), ', '.join(args)))
 
 
 """
-bot token (provided by hidden file when hosted locally)
+# bot token (provided by hidden file when hosted locally)
 f = open("token", 'r')
 TOKEN = f.read()
 """
@@ -61,4 +57,4 @@ TOKEN = f.read()
 TOKEN = os.getenv("DISCORD_TOKEN")
 
 if __name__ == "__main__":
-    client.run(TOKEN)
+    bot.run(TOKEN)
