@@ -1,10 +1,12 @@
-import logging
+import os
 
 import discord
 from discord.ext import commands
 
 
-# logger
+"""
+# logger (when hosted locally)
+import logging
 logging.basicConfig(level=logging.INFO)
 
 logger = logging.getLogger('discord')
@@ -12,7 +14,7 @@ logger.setLevel(logging.DEBUG)
 handler = logging.FileHandler(filename='discord.log', encoding='utf-8', mode='w')
 handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(message)s'))
 logger.addHandler(handler)
-
+"""
 
 
 # discord bot start client
@@ -40,19 +42,23 @@ async def changeCommandPrefix(ctx, arg1):
     client = commands.Bot(command_prefix=arg1)
     await ctx.send("Change command prefix to: " + string(arg1))
 
-
-@commands.command(name = "echo", aliases=["repeat"])
+@client.command(name = "echo", aliases=["repeat"])
 async def  echo(self, ctx:commands.Context, message: str):
     await ctx.send(message)
 
-@commands.command(name = "argcheck", aliases=["aliase"])
+@client.command(name = "argcheck", aliases=["argcount"])
 async def  num_args(self, ctx:commands.Context, *args):
     await ctx.send('{} arguments: {}'.format(len(args), ', '.join(args)))
 
 
-# bot token
+"""
+bot token (provided by hidden file when hosted locally)
 f = open("token", 'r')
-token = f.read()
+TOKEN = f.read()
+"""
 
-# discord bot login using token
-client.run(token)
+# discord bot login using token (provided when hosted through Heroku)
+TOKEN = os.getenv("DISCORD_TOKEN")
+
+if __name__ == "__main__":
+    client.run(TOKEN)
