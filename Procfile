@@ -1,0 +1,1 @@
+worker: python3 bot/test_bot.py
