@@ -38,7 +38,7 @@ async def changeCommandPrefix(ctx, arg1):
     bot = commands.Bot(command_prefix=commands.when_mentioned_or(arg1))
     await ctx.send("Change command prefix to: " + string(arg1))
 
-@bot.command(name = "echo", aliases=["repeat"])
+@bot.command(name = "mimic", aliases=["repeat"])
 async def  copy_user(self, ctx:commands.Context, message: str):
     await ctx.send(message)
 
