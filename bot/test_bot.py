@@ -39,7 +39,7 @@ async def changeCommandPrefix(ctx, arg1):
     await ctx.send("Change command prefix to: " + string(arg1))
 
 @bot.command(name = "echo", aliases=["repeat"])
-async def  echo(self, ctx:commands.Context, message: str):
+async def  copy_user(self, ctx:commands.Context, message: str):
     await ctx.send(message)
 
 @bot.command(name = "argcheck", aliases=["argcount"])
