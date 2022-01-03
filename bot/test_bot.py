@@ -25,25 +25,24 @@ async def on_ready():
     print("We have logged in as {0.user}".format(bot))
 
 
-@bot.command()
-async def echo(ctx, *, message: str):
-    await ctx.send(message)
 
-@bot.command()
-async def argsin(ctx, *args):
-    await ctx.send('{} arguments: {}'.format(len(args), ', '.join(args)))
+@bot.command(name = "setprefix")
+async def update_prefix(ctx, arg1: str):
+    print('Command issued (setprefix) with {} arguments: {}'.format(len(args), ', '.join(args)))
 
-@bot.command()
-async def changeCommandPrefix(ctx, arg1):
     bot = commands.Bot(command_prefix=commands.when_mentioned_or(arg1))
-    await ctx.send("Change command prefix to: " + string(arg1))
+    await ctx.send("Change command prefix to: " + arg1)
 
-@bot.command(name = "mimic", aliases=["repeat"])
+@bot.command(name = "echo", aliases=["repeat", "mimic"])
 async def  copy_user(ctx, message: str):
+    print('Command issued (echo / mimic / repeat) with {} arguments: {}'.format(len(args), ', '.join(args)))
+    
     await ctx.send(message)
 
 @bot.command(name = "argcheck", aliases=["argcount"])
 async def  num_args(ctx, *args):
+    print('Command issued (argcheck / argcount) with {} arguments: {}'.format(len(args), ', '.join(args)))
+
     await ctx.send('{} arguments: {}'.format(len(args), ', '.join(args)))
 
 
