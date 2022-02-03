@@ -31,7 +31,7 @@ async def update_prefix(ctx, arg1: str):
     print('Command issued (setprefix) with argument: ' + arg1)
 
     bot = commands.Bot(command_prefix=commands.when_mentioned_or(arg1))
-    await ctx.send("Change command prefix to: " + arg1)
+    await ctx.send("Changed command prefix to: " + arg1)
 
 @bot.command(name = "echo", aliases=["repeat", "mimic"])
 async def  copy_user(ctx, message: str):
